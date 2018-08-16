@@ -10,7 +10,7 @@
 
 ### Step2. 部署
 
-#### 下載 [github repo](https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client)， 部署以下三個 yaml
+#### 下載 [github repo](https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client)， 部署以下四個 yaml
 
 * `deploy/auth/serviceaccount.yaml` 
 * `deploy/auth/clusterrole.yaml` 
