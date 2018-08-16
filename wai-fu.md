@@ -10,5 +10,5 @@
 
 ## DNS 設定
 
-設定 Ingress時，自訂的 Domain Name 對應到任一個工作 Node 即可
+設定 Ingress時，自訂的 Domain Name 對應到任一個工作 Node ip 即可
 
