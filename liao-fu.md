@@ -22,7 +22,7 @@ description: mount volume 資料覆蓋原有資料問題
 
 ![](.gitbook/assets/7%20%281%29.PNG)
 
-![](.gitbook/assets/image%20%285%29.png)
+![](.gitbook/assets/image%20%286%29.png)
 
 #### 複製 command 範例
 

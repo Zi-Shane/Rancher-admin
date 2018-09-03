@@ -34,5 +34,5 @@
 
 任一個 Application 底下，找到 Security & Host Config 下半部有 CPU, Memory Reservation 可以限制使用資源
 
-![](.gitbook/assets/image%20%286%29.png)
+![](.gitbook/assets/image%20%287%29.png)
 

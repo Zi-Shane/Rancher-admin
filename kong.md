@@ -42,7 +42,7 @@ description: '以 Prometheus, grafana 架設監控系統'
 
 按左上方的 Home 可以選 Dashboard
 
-![](.gitbook/assets/image%20%283%29.png)
+![](.gitbook/assets/image%20%284%29.png)
 
 ## AlertManager
 

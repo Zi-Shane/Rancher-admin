@@ -10,19 +10,66 @@
 
 ### Step2. 部署
 
-#### 下載 [github repo](https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client)， 部署以下四個 yaml
+#### 下載 [github repo](https://github.com/kubernetes-incubator/external-storage/tree/master/nfs-client)， 部署以下兩個 yaml \(按右上角 Import YAML，修改完成後，複製貼上到黑色區塊即可\)
 
-* `deploy/auth/serviceaccount.yaml` 
-* `deploy/auth/clusterrole.yaml` 
-* **`deploy/auth/clusterrolebinding.yaml`**
+![](.gitbook/assets/image%20%283%29.png)
+
+* **`deploy/rbac.yaml`**
 * **`deploy/deployment.yaml`** 
 
 {% hint style="warning" %}
 #### 其中兩個檔案需要修改
 
-* 修改 `clusterrolebinding.yaml` 的 `namespace ，`指定要部署在哪個 `namespace`
+* 修改 `rbac.yaml` 的 `namespace (有兩個)，`指定要部署在哪個 `namespace`
 * 修改 `deploy/deployment.yaml` 修改其中的：`PROVISIONER_NAME`、`NFS_SERVER`、`NFS_PATH`，`NFS share directory`等資料，有5處需要修改
 {% endhint %}
+
+#### rbac.yaml 範例
+
+{% code-tabs %}
+{% code-tabs-item title="deploy/rbac.yaml" %}
+```yaml
+...
+...
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: run-nfs-client-provisioner
+subjects:
+  - kind: ServiceAccount
+    name: nfs-client-provisioner
+    namespace: default       # **此處需要修改**
+roleRef:
+  kind: ClusterRole
+  name: nfs-client-provisioner-runner
+  apiGroup: rbac.authorization.k8s.io
+---
+kind: Role
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: leader-locking-nfs-client-provisioner
+rules:
+  - apiGroups: [""]
+    resources: ["endpoints"]
+    verbs: ["get", "list", "watch", "create", "update", "patch"]
+---
+kind: RoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: leader-locking-nfs-client-provisioner
+subjects:
+  - kind: ServiceAccount
+    name: nfs-client-provisioner
+    # replace with namespace where provisioner is deployed
+    namespace: default      # **此處需要修改**
+roleRef:
+  kind: Role
+  name: leader-locking-nfs-client-provisioner
+  apiGroup: rbac.authorization.k8s.io
+```
+{% endcode-tabs-item %}
+{% endcode-tabs %}
 
 #### deployment.yaml 範例
 
